@@ -47,6 +47,7 @@ type ScrapeConfigSpecApplyConfiguration struct {
 	PuppetDBSDConfigs                []PuppetDBSDConfigApplyConfiguration     `json:"puppetDBSDConfigs,omitempty"`
 	LightSailSDConfigs               []LightSailSDConfigApplyConfiguration    `json:"lightSailSDConfigs,omitempty"`
 	OVHCloudSDConfigs                []OVHCloudSDConfigApplyConfiguration     `json:"ovhcloudSDConfigs,omitempty"`
+	IonosSDConfigs                   []IonosSDConfigApplyConfiguration        `json:"ionosSDConfigs,omitempty"`
 	RelabelConfigs                   []v1.RelabelConfigApplyConfiguration     `json:"relabelings,omitempty"`
 	MetricsPath                      *string                                  `json:"metricsPath,omitempty"`
 	ScrapeInterval                   *monitoringv1.Duration                   `json:"scrapeInterval,omitempty"`
@@ -355,6 +356,19 @@ func (b *ScrapeConfigSpecApplyConfiguration) WithOVHCloudSDConfigs(values ...*OV
 			panic("nil value passed to WithOVHCloudSDConfigs")
 		}
 		b.OVHCloudSDConfigs = append(b.OVHCloudSDConfigs, *values[i])
+	}
+	return b
+}
+
+// WithIonosSDConfigs adds the given value to the IonosSDConfigs field in the declarative configuration
+// and returns the receiver, so that objects can be build by chaining "With" function invocations.
+// If called multiple times, values provided by each call will be appended to the IonosSDConfigs field.
+func (b *ScrapeConfigSpecApplyConfiguration) WithIonosSDConfigs(values ...*IonosSDConfigApplyConfiguration) *ScrapeConfigSpecApplyConfiguration {
+	for i := range values {
+		if values[i] == nil {
+			panic("nil value passed to WithIonosSDConfigs")
+		}
+		b.IonosSDConfigs = append(b.IonosSDConfigs, *values[i])
 	}
 	return b
 }
